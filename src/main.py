@@ -1,0 +1,37 @@
+from flask import Flask, request, jsonify
+from flask.wrappers import Response
+
+from searchdao.searchdao import SearchesDAO
+from external.git_jobs import access_git_jobs
+from constants import FLASK_HOST, FLASK_PORT
+
+app = Flask(__name__)
+
+@app.route("/record_search", methods = ["POST"])
+def record_search():
+    json = request.get_json()["search"]
+    searches = SearchesDAO()
+    response = searches.add_search_to_db(data=json)
+    return jsonify(response), 200
+
+
+
+@app.route("/get_jobs/<string:location>/<string:description>", methods = ["GET"])
+def get_git_jobs(location, description):
+
+    if all([location, description]) == None:
+        return jsonify({}), 200
+  
+    else:
+        response = access_git_jobs(location, description)
+        return jsonify(response), 200
+    
+
+
+
+
+if __name__ == "__main__":
+    #First initializes the DB to assure the existence of the searches table.
+    searches = SearchesDAO()
+    searches.initialize_search_table()
+    app.run(host=FLASK_HOST, port=FLASK_PORT)
