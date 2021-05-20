@@ -1,17 +1,21 @@
 from flask import Flask, request, jsonify
 from flask.wrappers import Response
+from flask_cors import CORS
+import json
 
 from searchdao.searchdao import SearchesDAO
 from external.git_jobs import access_git_jobs
 from constants import FLASK_HOST, FLASK_PORT
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/record_search", methods = ["POST"])
 def record_search():
-    json = request.get_json()["search"]
+    data = json.loads(request.data)
+    print('data', str(data))
     searches = SearchesDAO()
-    response = searches.add_search_to_db(data=json)
+    response = searches.add_search_to_db(data=data)
     return jsonify(response), 200
 
 

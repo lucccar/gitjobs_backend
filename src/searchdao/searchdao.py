@@ -1,5 +1,5 @@
 from model.connection import BasicDAO, ConnectionDecorator
-
+from datetime import datetime
 
 class SearchesDAO(BasicDAO):
 
@@ -9,10 +9,10 @@ class SearchesDAO(BasicDAO):
     @ConnectionDecorator.open_conn
     def add_search_to_db(self, data=None):
 
-        time = data.get("time", None)
         description = data.get('description', None)
         location = data.get('location', None)
-        ipaddress = data.get('ipaddress', None)
+        ipaddress = "666.666.666.666"
+        time = datetime.now()
 
         location = location.replace(" ", "_")
 
