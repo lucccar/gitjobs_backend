@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from flask.wrappers import Response
 from flask_cors import CORS
 import json
 
@@ -8,6 +7,7 @@ from external.git_jobs import access_git_jobs
 from constants import FLASK_HOST, FLASK_PORT
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 CORS(app)
 
 @app.route("/record_search", methods = ["POST"])
