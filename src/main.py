@@ -13,7 +13,6 @@ CORS(app)
 @app.route("/record_search", methods = ["POST"])
 def record_search():
     data = json.loads(request.data)
-    print('data', str(data))
     searches = SearchesDAO()
     response = searches.add_search_to_db(data=data)
     return jsonify(response), 200
