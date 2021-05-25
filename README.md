@@ -38,7 +38,7 @@ A post endpoint that registers the search parameters used and logs it into the d
 
 1. Introduce unit testing for the route function and flask application itself.
 2. Log the ip address of the user in the database.
-3. Add WSGI and nginx.
+3. Add nginx.
 
 
 
