@@ -36,6 +36,5 @@ def get_git_jobs(location, description):
 
 if __name__ == "__main__":
     #First initializes the DB to assure the existence of the searches table.
-    searches = SearchesDAO()
-    searches.initialize_search_table()
+    SearchesDAO().initialize_search_table
     app.run(host=FLASK_HOST, port=FLASK_PORT)

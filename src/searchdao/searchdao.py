@@ -27,7 +27,8 @@ class SearchesDAO(BasicDAO):
         return "ok"
 
 
-    @ConnectionDecorator.open_conn    
+    @ConnectionDecorator.open_conn 
+    @staticmethod   
     def initialize_search_table(self):
 
         query = """CREATE TABLE IF NOT EXISTS searches (
